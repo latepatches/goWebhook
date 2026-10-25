@@ -1,6 +1,3 @@
-/* 
-enjoy
-*/
 package main
 
 import (
@@ -14,7 +11,7 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-var port = "3000"
+var port = ":3000"
 
 func newKey() string {
 	key1 := xid.New().String()
@@ -40,7 +37,7 @@ func retrieveWebhook(db *sql.DB, key string) string {
 	var webhook string
 
 	err := db.QueryRow(
-		`SELECT webhook FROM webhooks WHERE newKey = ?`,
+		`SELECT webhook FROM webhooks WHERE key = ?`,
 		key,
 	).Scan(&webhook)
 
